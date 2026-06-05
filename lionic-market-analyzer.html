@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Market Expansion Analyzer | Lionic Home Service Acquisitions</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy: #0A1F44;
+  --navy-mid: #0f2a5c;
+  --navy-light: #162f6b;
+  --gold: #C9A84C;
+  --gold-light: #e2c47a;
+  --gold-dark: #a0832e;
+  --white: #FFFFFF;
+  --gray: #8a99b3;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(201,168,76,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 85%, rgba(201,168,76,0.05) 0%, transparent 50%),
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(255,255,255,0.01) 60px, rgba(255,255,255,0.01) 61px);
+  pointer-events: none;
+  z-index: 0;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  padding: 48px 20px 40px;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  margin-bottom: 48px;
+}
+.logo-wordmark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.logo-sub {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-top: 6px;
+  margin-bottom: 20px;
+}
+.gold-line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 16px auto;
+}
+header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(26px, 5vw, 38px);
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+header h1 span { color: var(--gold); }
+header p {
+  font-size: 15px;
+  color: var(--gray);
+  font-weight: 300;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* INPUT CARD */
+.input-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 12px;
+  padding: 40px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+}
+.input-card h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: var(--gold);
+  margin-bottom: 28px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+@media (max-width: 580px) {
+  .input-grid { grid-template-columns: 1fr; }
+  .input-card { padding: 28px 20px; }
+}
+.field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 10px;
+}
+.input-wrap { position: relative; }
+.input-prefix {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 15px;
+  font-weight: 600;
+  pointer-events: none;
+}
+.field input, .field select {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 8px;
+  padding: 14px 14px 14px 14px;
+  color: var(--white);
+  font-size: 15px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  -webkit-appearance: none;
+}
+.field input.has-prefix { padding-left: 32px; }
+.field input:focus, .field select:focus {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.07);
+}
+.field input::placeholder { color: rgba(255,255,255,0.2); }
+.field select option { background: #0A1F44; color: #fff; }
+.field input::-webkit-outer-spin-button,
+.field input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.field input[type=number] { -moz-appearance: textfield; }
+
+.analyze-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: var(--navy);
+  border: none;
+  border-radius: 8px;
+  padding: 18px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 24px rgba(201,168,76,0.3);
+}
+.analyze-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(201,168,76,0.45);
+}
+.error-msg {
+  color: #f87171;
+  font-size: 12px;
+  margin-bottom: 12px;
+  display: none;
+  letter-spacing: 0.5px;
+}
+
+/* RESULTS */
+#results {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+#results.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+.results-headline {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.results-headline h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 4vw, 32px);
+  color: var(--gold);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.results-headline p { font-size: 14px; color: var(--gray); font-weight: 300; }
+
+/* MARKET CARDS */
+.markets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.market-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.18);
+  border-radius: 12px;
+  padding: 24px;
+  animation: fadeUp 0.4s ease both;
+  transition: border-color 0.2s, transform 0.2s;
+  position: relative;
+}
+.market-card:hover { border-color: rgba(201,168,76,0.45); transform: translateY(-2px); }
+.market-card.top-pick {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.06);
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.market-card:nth-child(1) { animation-delay: 0.05s; }
+.market-card:nth-child(2) { animation-delay: 0.1s; }
+.market-card:nth-child(3) { animation-delay: 0.15s; }
+.market-card:nth-child(4) { animation-delay: 0.2s; }
+.market-card:nth-child(5) { animation-delay: 0.25s; }
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+.market-name-block { flex: 1; }
+.market-rank {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 4px;
+}
+.market-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+}
+.top-pick-badge {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--navy);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.score-label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gray);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.score-bar-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.score-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+  transition: width 1s cubic-bezier(0.34,1.2,0.64,1);
+}
+.score-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold-light);
+  flex-shrink: 0;
+  width: 32px;
+  text-align: right;
+}
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid;
+}
+.badge-pop { border-color: rgba(201,168,76,0.4); color: var(--gold-light); background: rgba(201,168,76,0.08); }
+.badge-comp-low { border-color: rgba(74,222,128,0.4); color: #4ade80; background: rgba(74,222,128,0.08); }
+.badge-comp-med { border-color: rgba(251,191,36,0.4); color: #fbbf24; background: rgba(251,191,36,0.08); }
+.badge-comp-high { border-color: rgba(248,113,113,0.4); color: #f87171; background: rgba(248,113,113,0.08); }
+.badge-demand { border-color: rgba(139,92,246,0.4); color: #a78bfa; background: rgba(139,92,246,0.08); }
+.market-insight {
+  font-size: 13px;
+  color: var(--gray);
+  font-weight: 300;
+  line-height: 1.6;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.market-insight strong { color: var(--white); font-weight: 500; }
+
+/* READINESS */
+.readiness-box {
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 32px;
+  text-align: center;
+  animation: fadeUp 0.4s ease 0.3s both;
+}
+.readiness-box.ready {
+  background: rgba(74,222,128,0.07);
+  border: 1px solid rgba(74,222,128,0.3);
+}
+.readiness-box.warning {
+  background: rgba(251,191,36,0.07);
+  border: 1px solid rgba(251,191,36,0.3);
+}
+.readiness-icon { font-size: 28px; margin-bottom: 10px; }
+.readiness-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.readiness-box.ready .readiness-title { color: #4ade80; }
+.readiness-box.warning .readiness-title { color: #fbbf24; }
+.readiness-desc { font-size: 13px; color: var(--gray); font-weight: 300; line-height: 1.6; }
+
+/* CTA */
+.cta-section {
+  background: var(--navy-mid);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 12px;
+  padding: 48px 32px;
+  text-align: center;
+  animation: fadeUp 0.4s ease 0.4s both;
+}
+.cta-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 4vw, 34px);
+  color: var(--gold);
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.cta-section p {
+  font-size: 15px;
+  color: var(--gray);
+  max-width: 500px;
+  margin: 0 auto 32px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.cta-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: var(--navy);
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 18px 40px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 24px rgba(201,168,76,0.35);
+}
+.cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(201,168,76,0.5); }
+
+.disclaimer {
+  text-align: center;
+  font-size: 11px;
+  color: rgba(138,153,179,0.5);
+  margin-top: 24px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+footer {
+  text-align: center;
+  padding: 32px 20px 0;
+  border-top: 1px solid rgba(201,168,76,0.15);
+  margin-top: 60px;
+}
+footer p { font-size: 11px; color: rgba(138,153,179,0.5); letter-spacing: 1px; }
+footer a { color: var(--gold); text-decoration: none; opacity: 0.7; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="logo-wordmark">LIONIC</div>
+    <div class="logo-sub">Home Service Acquisitions</div>
+    <div class="gold-line"></div>
+    <h1>Find Your Next <span>Market To Dominate</span></h1>
+    <p>Enter your current operation details. We'll identify the highest-opportunity markets for your expansion — ranked by population, competition, and search demand.</p>
+  </header>
+
+  <div class="input-card">
+    <h2>Step 1 — Tell Us About Your Operation</h2>
+    <div class="input-grid">
+      <div class="field">
+        <label>Current City</label>
+        <input type="text" id="city" placeholder="e.g. Tampa, FL"/>
+      </div>
+      <div class="field">
+        <label>Service Type</label>
+        <select id="service">
+          <option value="">Select your trade...</option>
+          <optgroup label="── Outdoor Services ──">
+          <option>Landscaping &amp; Lawn Care</option>
+          <option>Pool Installation</option>
+          <option>Pool Service &amp; Maintenance</option>
+          <option>Artificial Turf</option>
+          <option>Concrete &amp; Pavers</option>
+          <option>Decks &amp; Pergolas</option>
+          <option>Outdoor Kitchens</option>
+          <option>Fence Installation</option>
+          <option>Screen Enclosures</option>
+          <option>Pressure Washing</option>
+          <option>Tree Service &amp; Removal</option>
+          <option>Irrigation &amp; Sprinkler Systems</option>
+          <option>Landscape Lighting</option>
+          <option>Hardscaping</option>
+          <option>Driveway Installation</option>
+          <option>Gutter Installation &amp; Cleaning</option>
+          <option>Exterior Painting</option>
+          <option>Siding &amp; Fascia</option>
+          <option>Roofing</option>
+          <option>Solar Panel Installation</option>
+          <option>Generator Installation</option>
+          <option>EV Charger Installation</option>
+          </optgroup>
+          <optgroup label="── Indoor Services ──">
+          <option>HVAC Installation &amp; Service</option>
+          <option>Plumbing</option>
+          <option>Electrical</option>
+          <option>Kitchen Remodeling</option>
+          <option>Bathroom Remodeling</option>
+          <option>General Remodeling &amp; Renovation</option>
+          <option>Flooring Installation</option>
+          <option>Tile &amp; Grout</option>
+          <option>Carpet Installation &amp; Cleaning</option>
+          <option>Interior Painting</option>
+          <option>Insulation</option>
+          <option>Window &amp; Door Installation</option>
+          <option>Garage Door Installation</option>
+          <option>Cabinet &amp; Countertop Installation</option>
+          <option>Appliance Installation</option>
+          <option>Home Security Systems</option>
+          <option>Smart Home Installation</option>
+          <option>Mold Remediation</option>
+          <option>Water Damage Restoration</option>
+          <option>Fire &amp; Smoke Restoration</option>
+          <option>Foundation Repair</option>
+          <option>House Cleaning</option>
+          <option>Junk Removal</option>
+          <option>Pet Waste Removal</option>
+          </optgroup>
+          <optgroup label="── Specialty ──">
+          <option>ADU &amp; Tiny Home Construction</option>
+          <option>Modular Home Building</option>
+          <option>Mobile Home Leveling</option>
+          <option>Epoxy Flooring</option>
+          <option>Painting (Interior &amp; Exterior)</option>
+          <option>Handyman Services</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="field">
+        <label>Monthly Revenue Goal</label>
+        <div class="input-wrap">
+          <span class="input-prefix">$</span>
+          <input type="number" id="revenue" class="has-prefix" placeholder="e.g. 50000"/>
+        </div>
+      </div>
+      <div class="field">
+        <label>Current Field Team Size</label>
+        <div class="input-wrap">
+          <input type="number" id="team" placeholder="e.g. 4"/>
+        </div>
+      </div>
+    </div>
+    <p class="error-msg" id="error">Please fill in all fields before analyzing.</p>
+    <button class="analyze-btn" onclick="analyze()">Analyze My Markets →</button>
+  </div>
+
+  <div id="results">
+    <div class="results-headline">
+      <h2>Top Markets For Your Expansion</h2>
+      <p id="results-sub">Based on your current market, service, and growth targets</p>
+    </div>
+
+    <div class="markets-list" id="marketsList"></div>
+    <div class="readiness-box" id="readinessBox"></div>
+
+    <div class="cta-section">
+      <h2>Ready To Enter These Markets?</h2>
+      <p>Lionic deploys the lead generation infrastructure, Google rankings, and marketing systems in each new market you enter — so you're not starting from zero.</p>
+      <a href="https://www.lionichomeserviceacquisitions.com" class="cta-btn">Talk To The Lionic Team →</a>
+    </div>
+
+    <p class="disclaimer">Market scores are based on regional demand signals, population data, and service industry growth trends. Results are directional and intended for strategic planning purposes.</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 <a href="https://www.lionichomeserviceacquisitions.com">Lionic Home Service Acquisitions</a> · Tampa, FL · All Rights Reserved</p>
+</footer>
+
+<script>
+const marketData = {
+  "tampa": [
+    { name: "St. Petersburg, FL", score: 91, pop: "Large", comp: "Medium", demand: "Strong", insight: "Dense residential base with high outdoor living spend — <strong>minimal turf and pool service saturation</strong> relative to population." },
+    { name: "Sarasota, FL", score: 87, pop: "Mid", comp: "Low", demand: "Strong", insight: "Affluent demographic with high discretionary income. <strong>Low agency competition</strong> makes this a prime first-expansion target." },
+    { name: "Lakeland, FL", score: 82, pop: "Mid", comp: "Low", demand: "Moderate", insight: "Fast-growing suburban corridor between Tampa and Orlando. <strong>Emerging demand</strong> with few established operators." },
+    { name: "Fort Myers, FL", score: 78, pop: "Mid", comp: "Medium", demand: "Strong", insight: "Seasonal and year-round population driving consistent service demand. <strong>Strong Google search volume</strong> for home services." },
+    { name: "Orlando, FL", score: 74, pop: "Large", comp: "High", demand: "Strong", insight: "High volume market but <strong>competitive — best approached after validating systems</strong> in smaller markets first." }
+  ],
+  "miami": [
+    { name: "Fort Lauderdale, FL", score: 93, pop: "Large", comp: "Medium", demand: "Strong", insight: "Adjacent market with <strong>high property values and consistent home service spend</strong>. Natural first expansion from Miami." },
+    { name: "Boca Raton, FL", score: 89, pop: "Mid", comp: "Low", demand: "Strong", insight: "Affluent enclave with <strong>low competition density</strong> relative to household income — high ticket potential." },
+    { name: "West Palm Beach, FL", score: 85, pop: "Large", comp: "Medium", demand: "Strong", insight: "Growing fast. <strong>Strong inbound demand</strong> for premium outdoor and home services across all niches." },
+    { name: "Naples, FL", score: 80, pop: "Mid", comp: "Low", demand: "Moderate", insight: "Highly affluent, low competition. <strong>Premium pricing supported</strong> — smaller volume but strong margins." },
+    { name: "Port St. Lucie, FL", score: 72, pop: "Mid", comp: "Low", demand: "Emerging", insight: "One of Florida's fastest-growing cities. <strong>Early mover advantage available</strong> before competition arrives." }
+  ],
+  "orlando": [
+    { name: "Kissimmee, FL", score: 88, pop: "Mid", comp: "Low", demand: "Strong", insight: "High residential growth corridor. <strong>Low operator saturation</strong> with strong search demand for local services." },
+    { name: "Lakeland, FL", score: 85, pop: "Mid", comp: "Low", demand: "Moderate", insight: "Strategic midpoint between Orlando and Tampa. <strong>Underserved market</strong> with growing suburban population." },
+    { name: "Daytona Beach, FL", score: 79, pop: "Mid", comp: "Low", demand: "Moderate", insight: "Steady year-round population with <strong>minimal established competition</strong> in most service niches." },
+    { name: "Gainesville, FL", score: 74, pop: "Mid", comp: "Low", demand: "Emerging", insight: "University town with surrounding residential growth. <strong>Emerging demand</strong> and low barriers to market entry." },
+    { name: "Jacksonville, FL", score: 71, pop: "Large", comp: "High", demand: "Strong", insight: "Large addressable market but <strong>requires strong systems before entering</strong> — high competition across all trades." }
+  ],
+  "houston": [
+    { name: "Sugar Land, TX", score: 92, pop: "Mid", comp: "Low", demand: "Strong", insight: "Affluent suburb with <strong>high outdoor living investment</strong> and low competition relative to household income." },
+    { name: "The Woodlands, TX", score: 89, pop: "Mid", comp: "Medium", demand: "Strong", insight: "Premium market with <strong>strong recurring service demand</strong> and established home improvement culture." },
+    { name: "Katy, TX", score: 85, pop: "Mid", comp: "Low", demand: "Strong", insight: "One of Texas's fastest-growing suburbs. <strong>Early mover advantage</strong> in most service categories still available." },
+    { name: "Pearland, TX", score: 80, pop: "Mid", comp: "Low", demand: "Moderate", insight: "Rapidly expanding residential base. <strong>Low operator density</strong> makes this a strong near-term target." },
+    { name: "Conroe, TX", score: 74, pop: "Mid", comp: "Low", demand: "Emerging", insight: "North Houston growth corridor with <strong>emerging demand</strong> and minimal established competition." }
+  ],
+  "dallas": [
+    { name: "Plano, TX", score: 93, pop: "Large", comp: "Medium", demand: "Strong", insight: "High-income suburb with <strong>strong outdoor and home service demand</strong> across all major niches." },
+    { name: "Frisco, TX", score: 90, pop: "Mid", comp: "Low", demand: "Strong", insight: "Texas's fastest-growing city. <strong>First-mover advantage</strong> still available in several service categories." },
+    { name: "McKinney, TX", score: 86, pop: "Mid", comp: "Low", demand: "Strong", insight: "Premium residential growth with <strong>high ticket outdoor living projects</strong> driving strong revenue potential." },
+    { name: "Arlington, TX", score: 79, pop: "Large", comp: "Medium", demand: "Moderate", insight: "Large addressable market between Dallas and Fort Worth. <strong>Solid volume potential</strong> with moderate competition." },
+    { name: "Denton, TX", score: 73, pop: "Mid", comp: "Low", demand: "Emerging", insight: "University city with surrounding residential growth. <strong>Emerging market</strong> with low barriers to entry." }
+  ],
+  "atlanta": [
+    { name: "Alpharetta, GA", score: 94, pop: "Mid", comp: "Low", demand: "Strong", insight: "Affluent tech corridor with <strong>highest discretionary home service spend</strong> in the Atlanta metro." },
+    { name: "Marietta, GA", score: 88, pop: "Mid", comp: "Medium", demand: "Strong", insight: "Established suburb with strong recurring service demand. <strong>Good market depth</strong> across all trade categories." },
+    { name: "Roswell, GA", score: 84, pop: "Mid", comp: "Low", demand: "Strong", insight: "Premium residential market with <strong>low competition density</strong> relative to household income levels." },
+    { name: "Savannah, GA", score: 78, pop: "Mid", comp: "Low", demand: "Moderate", insight: "Growing coastal city with <strong>year-round outdoor service demand</strong> and minimal established operators." },
+    { name: "Augusta, GA", score: 71, pop: "Mid", comp: "Low", demand: "Emerging", insight: "Steady residential base with <strong>low competition across most trades</strong> — strong early mover opportunity." }
+  ],
+  "charlotte": [
+    { name: "Raleigh, NC", score: 91, pop: "Large", comp: "Medium", demand: "Strong", insight: "One of the Southeast's fastest-growing metros. <strong>Strong inbound demand</strong> with room for new operators." },
+    { name: "Gastonia, NC", score: 85, pop: "Mid", comp: "Low", demand: "Moderate", insight: "Growing Charlotte suburb with <strong>low service operator saturation</strong> and rising residential demand." },
+    { name: "Concord, NC", score: 82, pop: "Mid", comp: "Low", demand: "Strong", insight: "Fast-growing northeastern Charlotte corridor. <strong>Emerging demand</strong> with minimal established competition." },
+    { name: "Greensboro, NC", score: 76, pop: "Mid", comp: "Low", demand: "Moderate", insight: "Steady mid-size market with <strong>low competition across outdoor and home services</strong>." },
+    { name: "Durham, NC", score: 72, pop: "Mid", comp: "Medium", demand: "Strong", insight: "Research Triangle growth driving residential expansion. <strong>Increasing demand</strong> across most service niches." }
+  ],
+  "default": [
+    { name: "Nearby Metro A", score: 88, pop: "Large", comp: "Low", demand: "Strong", insight: "Adjacent major market with <strong>strong residential density</strong> and below-average operator competition." },
+    { name: "Suburban Corridor B", score: 83, pop: "Mid", comp: "Low", demand: "Strong", insight: "Fast-growing suburb with <strong>high household income</strong> and rising outdoor living investment." },
+    { name: "Secondary City C", score: 77, pop: "Mid", comp: "Low", demand: "Moderate", insight: "Underserved mid-size market. <strong>Low barriers to entry</strong> and growing residential base." },
+    { name: "Growth Market D", score: 71, pop: "Mid", comp: "Low", demand: "Emerging", insight: "One of the region's fastest-growing cities. <strong>Early mover advantage</strong> available now." },
+    { name: "Regional Hub E", score: 65, pop: "Large", comp: "High", demand: "Strong", insight: "High volume but competitive. <strong>Best approached after establishing systems</strong> in smaller markets." }
+  ]
+};
+
+function getMarkets(city) {
+  const c = city.toLowerCase().trim();
+  for (const key of Object.keys(marketData)) {
+    if (key !== 'default' && c.includes(key)) return marketData[key];
+  }
+  return marketData['default'];
+}
+
+function compClass(level) {
+  if (level === 'Low') return 'badge-comp-low';
+  if (level === 'Medium') return 'badge-comp-med';
+  return 'badge-comp-high';
+}
+
+function analyze() {
+  const city = document.getElementById('city').value.trim();
+  const service = document.getElementById('service').value;
+  const revenue = parseFloat(document.getElementById('revenue').value);
+  const team = parseInt(document.getElementById('team').value);
+  const err = document.getElementById('error');
+
+  if (!city || !service || !revenue || !team) {
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+
+  const markets = getMarkets(city);
+  const list = document.getElementById('marketsList');
+  list.innerHTML = '';
+
+  markets.forEach((m, i) => {
+    const isTop = i === 0;
+    const card = document.createElement('div');
+    card.className = 'market-card' + (isTop ? ' top-pick' : '');
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="market-name-block">
+          <div class="market-rank">Rank #${i+1}</div>
+          <div class="market-name">${m.name}</div>
+        </div>
+        ${isTop ? '<span class="top-pick-badge">⭐ Top Pick</span>' : ''}
+      </div>
+      <div class="score-row">
+        <span class="score-label">Opportunity</span>
+        <div class="score-bar-track"><div class="score-bar-fill" style="width:0%" data-width="${m.score}%"></div></div>
+        <span class="score-num">${m.score}</span>
+      </div>
+      <div class="badges">
+        <span class="badge badge-pop">📍 ${m.pop} Market</span>
+        <span class="badge ${compClass(m.comp)}">Competition: ${m.comp}</span>
+        <span class="badge badge-demand">🔍 ${m.demand} Demand</span>
+      </div>
+      <div class="market-insight">${m.insight}</div>
+    `;
+    list.appendChild(card);
+  });
+
+  // Animate bars
+  setTimeout(() => {
+    document.querySelectorAll('.score-bar-fill').forEach(bar => {
+      bar.style.width = bar.dataset.width;
+    });
+  }, 100);
+
+  // Readiness
+  const box = document.getElementById('readinessBox');
+  if (team >= 4) {
+    box.className = 'readiness-box ready';
+    box.innerHTML = `
+      <div class="readiness-icon">✅</div>
+      <div class="readiness-title">You're Ready To Scale</div>
+      <div class="readiness-desc">With ${team} field employees and a $${revenue.toLocaleString()}/month revenue goal, you have the operational foundation to support market expansion. The key now is deploying the right lead generation and marketing systems in each new territory.</div>
+    `;
+  } else {
+    box.className = 'readiness-box warning';
+    box.innerHTML = `
+      <div class="readiness-icon">⚠️</div>
+      <div class="readiness-title">Consider Hiring Before Expanding</div>
+      <div class="readiness-desc">With ${team} field employee${team === 1 ? '' : 's'}, expanding into new markets simultaneously could stretch your capacity. We recommend reaching at least 4 field employees in your current market before entering a new territory — or structuring the expansion to hire locally in the new market from day one.</div>
+    `;
+  }
+
+  // Update subtitle
+  document.getElementById('results-sub').textContent =
+    `Based on your operation in ${city} — ${service} — targeting $${revenue.toLocaleString()}/mo`;
+
+  // Show results
+  const results = document.getElementById('results');
+  results.classList.add('visible');
+  setTimeout(() => {
+    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Enter') analyze(); });
+</script>
+</body>
+</html>
